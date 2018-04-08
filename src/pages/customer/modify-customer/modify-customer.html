@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Modifier une cliente</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-input [(ngModel)]="customer.nom" type="text" placeholder="Nom de la cliente"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="customer.typeCliente" type="text" placeholder="Type de cliente"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="customer.adresse" type="text" placeholder="Adresse de la cliente"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-input [(ngModel)]="customer.telephone" type="tel" placeholder="Numéro"></ion-input>
+    </ion-item>
+  <button ion-button block (click)="modifyCustomer(customer)"> Modifier</button>
+
+</ion-content>

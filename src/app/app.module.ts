@@ -9,10 +9,11 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { TestPage } from '../pages/test/test';
 import { CustomerPage } from '../pages/customer/customer';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { CustomerListService } from '../services/customerList/customer-list.service';
+import { ModifyCustomerPage } from '../pages/customer/modify-customer/modify-customer';
 
 
 @NgModule({
@@ -20,8 +21,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     MaquPro,
     HomePage,
     ListPage,
-    TestPage,
-    CustomerPage
+    CustomerPage,
+    ModifyCustomerPage
   ],
   imports: [
     BrowserModule,
@@ -34,13 +35,14 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     MaquPro,
     HomePage,
     ListPage,
-    TestPage,
-    CustomerPage
-  ],
+    CustomerPage,
+    ModifyCustomerPage
+    ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CustomerListService 
   ]
 })
 export class AppModule {}

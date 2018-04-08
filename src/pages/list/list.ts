@@ -1,71 +1,73 @@
+import { CustomerPage } from './../customer/customer';
+import { Cliente } from './../../models/cliente.model';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { CustomerPage } from '../customer/customer';
-import { TestPage } from '../test/test';
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { ActionSheetController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { CustomerListService } from '../../services/customerList/customer-list.service';
+import { ModifyCustomerPage } from '../customer/modify-customer/modify-customer';
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{ title: string, note: string, icon: string }>;
+  customersList: Observable<Cliente[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    this.items = [];
-    this.items = [{
-      title: 'Céline',
-      note: 'black',
-      icon: 'contact'
-    }, {
-      title: 'Farah',
-      note: 'black',
-      icon: 'contact'
-    }, {
-      title: 'Adeline',
-      note: 'black',
-      icon: 'contact'
-    }, {
-      title: 'Sophie',
-      note: 'black',
-      icon: 'contact'
-    }, {
-      title: 'Sabine',
-      note: 'Normal',
-      icon: 'contact'
-    }, {
-      title: 'Marie-Jo',
-      note: 'Privilège',
-      icon: 'contact'
-    }, {
-      title: 'Audrey',
-      note: 'Normal',
-      icon: 'contact'
-    }, {
-      title: 'Hasna',
-      note: 'Normal',
-      icon: 'contact'
-    }, {
-      title: 'Mme Hssina',
-      note: 'Normal',
-      icon: 'contact'
-    }, {
-      title: 'Mme Palmade',
-      note: 'Normal',
-      icon: 'contact'
-    }];
+  constructor(
+    private fdb: AngularFireDatabase,
+    private navCtrl: NavController,
+    public actionSheetCtrl: ActionSheetController,
+    private customerListService: CustomerListService) {
+    this.customersList = this.customerListService
+      .getCustomersList()
+      .snapshotChanges()
+      .map(
+      changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      })
   }
 
-  itemTapped(event, item) {
-    this.navCtrl.push(CustomerPage, {item:item});
+  seeCustomer(event, cliente: Cliente) {
+    this.navCtrl.push(CustomerPage, { item: cliente })
   }
 
-  addCustomer() {
-    this.navCtrl.push(TestPage)
+  presentActionSheet(customer: Cliente) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modifier fiche cliente ?',
+      cssClass: '',
+      buttons: [
+        {
+          text: 'Supprimer',
+          role: 'delete',
+          cssClass: '',
+          handler: () => {
+            this.customerListService.deleteCustomer(customer);
+            console.log('delete clicked');
+          }
+        }, {
+          text: 'Modifier',
+          role: 'modify',
+          cssClass: '',
+          handler: () => {
+            this.navCtrl.push(ModifyCustomerPage, { customer: customer })
+            console.log('edit clicked');
+          }
+        }, {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: '',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
+
 }
+
