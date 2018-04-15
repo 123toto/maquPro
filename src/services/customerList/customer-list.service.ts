@@ -12,6 +12,7 @@ export class CustomerListService {
     }
 
     getCustomersList() {
+        console.log(this.customerListRef)
         return this.customerListRef;
     }
 

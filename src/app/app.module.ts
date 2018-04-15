@@ -26,7 +26,14 @@ import { ModifyCustomerPage } from '../pages/customer/modify-customer/modify-cus
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MaquPro),
+    IonicModule.forRoot(MaquPro, {
+      monthNames: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre' ],
+      monthShortNames: ['jan', 'fev', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc' ],
+      dayNames: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+      dayShortNames: ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'],
+      cancelText: "Annuler", 
+      doneText: "Valider"
+    }),
     AngularFireModule.initializeApp(FIREBASE_CONFIG), 
     AngularFireDatabaseModule
   ],

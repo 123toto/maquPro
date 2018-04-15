@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Mes Clientes</ion-title>
 
   </ion-navbar>
   <ion-fab top right>
@@ -19,7 +19,8 @@
         <ion-item (click)="seeCustomer($event, customer)">
           <ion-avatar item-start>
             <img src="../assets/imgs/rose.jpg">
-          </ion-avatar>
+          </ion-avatar>          
+          {{customer?.prenom}}
           {{customer?.nom}}
           <div item-end>
             {{customer?.typeCliente}}

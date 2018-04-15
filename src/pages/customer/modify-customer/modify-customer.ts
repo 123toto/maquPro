@@ -10,12 +10,8 @@ import { CustomerListService } from '../../../services/customerList/customer-lis
 })
 export class ModifyCustomerPage {
 
-  customer: Cliente = {
-    nom: '',
-    typeCliente: '',
-    adresse: '',
-    telephone: undefined
-  }
+  customer: Cliente = new Cliente();
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

@@ -19,8 +19,8 @@ export class MaquPro {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }      
+      { title: 'Acceuil', component: HomePage },
+      { title: 'Mes Clientes', component: ListPage }      
     ];
 
   }

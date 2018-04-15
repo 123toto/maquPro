@@ -12,12 +12,7 @@ import { ListPage } from '../../list/list';
 })
 export class AddCustomerPage {
 
-  customer: Cliente = {
-    nom : '',
-    typeCliente: '',
-    adresse: '',
-    telephone: undefined
-  }
+  customer: Cliente = new Cliente();
   customerList = [];
   constructor(
     public navCtrl: NavController,

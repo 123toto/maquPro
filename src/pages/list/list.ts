@@ -32,7 +32,7 @@ export class ListPage {
   }
 
   seeCustomer(event, cliente: Cliente) {
-    this.navCtrl.push(CustomerPage, { item: cliente })
+    this.navCtrl.push(CustomerPage, { customer: cliente })
   }
 
   presentActionSheet(customer: Cliente) {
